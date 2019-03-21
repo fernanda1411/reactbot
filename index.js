@@ -1,10 +1,15 @@
 const express = require('express');
-	const app = express();
+const app = express();
 
 
 app.get('/', (req, res) =>{
 	res.send({'hello': 'there'});
 });
 
-const PORT = process.enc.PORT || 5000;
-	app.listen(PORT);
+const PORT = process.env.PORT || 5001;
+
+// app.listen(PORT);
+
+app.listen(PORT, function () {
+  console.log('Express server is up on port ' + PORT);
+});

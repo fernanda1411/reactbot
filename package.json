@@ -4,15 +4,19 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node":"11.1.0"
+    "node": "11.1.0",
     "npm": "6.9.0"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
   }
 }
