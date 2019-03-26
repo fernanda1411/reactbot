@@ -1,15 +1,31 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+
 const app = express();
 
+const config = require('./config/keys');
+const mongoose = require('mongoose');
+mongoose.connect(`mongodb+srv://noticiasdobr:noticiasdobr@noticias-do-br-uwwct.mongodb.net/test?retryWrites=true`, { useNewUrlParser: true });
 
-app.get('/', (req, res) =>{
-	res.send({'hello': 'there'});
-});
+// require('./models/Registration');
+// require('./models/Demand');
+// require('./models/Coupons');
 
+
+app.use(bodyParser.json());
+
+require('./routes/dialogFlowRoutes')(app);
+require('./routes/fulfillmentRoutes')(app);
+
+if (process.env.NODE_ENV === 'production') {
+    // js and css files
+    app.use(express.static('client/build'));
+    // index.html for all page routes
+    const path = require('path');
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
 const PORT = process.env.PORT || 5001;
+app.listen(PORT);
 
-// app.listen(PORT);
-
-app.listen(PORT, function () {
-  console.log('Express server is up on port ' + PORT);
-});

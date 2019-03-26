@@ -14,7 +14,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.4"
+    "body-parser": "^1.18.3",
+    "dialogflow": "^0.8.2",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.20"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"

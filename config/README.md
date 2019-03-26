@@ -1,0 +1,1 @@
+export GOOGLE_APPLICATION_CREDENTIALS=/Users/nanda/projects/Project/reactbot/config/reactpageagent-b0ba4-590a84fafd3a.json
