@@ -15,7 +15,7 @@ mongoose.connect(`mongodb+srv://noticiasdobr:noticiasdobr@noticias-do-br-uwwct.m
 app.use(bodyParser.json());
 
 require('./routes/dialogFlowRoutes')(app);
-require('./routes/fulfillmentRoutes')(app);
+//require('./routes/fulfillmentRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
     // js and css files
