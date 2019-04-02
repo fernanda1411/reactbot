@@ -2,3 +2,4 @@ node_modules
 .idea
 # config/keys.js
 config/dev.js
+config/reactbot-ca8bf-d2ee6f4d61db.json

@@ -1,1 +1,10 @@
-export GOOGLE_APPLICATION_CREDENTIALS=/Users/nanda/projects/Project/reactbot/config/reactpageagent-b0ba4-590a84fafd3a.json
+# Add GOOGLE_APPLICATION_CREDENTIALS the enviroment variables:
+
+export GOOGLE_APPLICATION_CREDENTIALS=/Users/nanda/Projects/Project/reactbot/config/reactbot-ca8bf-d2ee6f4d61db.json
+
+
+
+
+# Print enviroment variables
+
+printenv

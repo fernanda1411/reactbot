@@ -27,5 +27,7 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 const PORT = process.env.PORT || 5001;
+console.log('App running at port: ', PORT);
+console.log('GOOGLE_APPLICATION_CREDENTIALS: ', process.env.GOOGLE_APPLICATION_CREDENTIALS);
 app.listen(PORT);
 

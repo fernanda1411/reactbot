@@ -14,8 +14,16 @@ const credentials = {
 };
 
 const sessionClient = new dialogflow.SessionsClient({projectId, credentials});
+// const sessionClient = new dialogflow.SessionsClient({
+//     keyFilename: '/Users/nanda/Projects/Project/reactbot/config/reactpageagent-b0ba4-6e906c102a3c.json'
+// });
+// const sessionClient = new dialogflow.SessionsClient();
+
+// console.log('sessionClient', sessionClient);
 
 const sessionPath = sessionClient.sessionPath(projectId, sessionId);
+
+console.log('sessionPath: ', sessionPath);
 
 module.exports = {
     textQuery: async function(text, parameters= {}){
@@ -25,7 +33,7 @@ module.exports = {
             queryInput: {
                 text: {
                     text: text,
-                    languageCode: config.dialogFlowSessionLanguageCode,
+                    languageCode: languageCode,
                 },
             },
             queryParams: {
@@ -40,18 +48,21 @@ module.exports = {
     },
 
     eventQuery: async function(text, parameters= {}){
+        console.log('eventQueries')
         let self = module.exports;
         const request = {
             session: sessionPath,
             queryInput: {
                 text: {
-                    text: event,
+                    text: 'event',
                     parameters: structjson.jsonToStructProto(parameters),
-                    languageCode: config.dialogFlowSessionLanguageCode,
+                    languageCode: languageCode,
                 },
             }
         };
-        let responses = await sessionClient.detectIntent(request)
+        console.log('antes intent');
+        let responses = await sessionClient.detectIntent(request);
+        console.log('depois intent');
         responses = await self.handleAction(responses);
         return responses;
     },
