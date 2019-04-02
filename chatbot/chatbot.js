@@ -6,24 +6,13 @@ const config = require('../config/keys');
 const projectId = config.googleProjectID;
 const sessionId = config.dialogFlowSessionID;
 const languageCode = config.dialogFlowSessionLanguageCode;
-
-
 const credentials = {
     client_email: config.googleClientEmail,
     private_key: config.googlePrivateKey,
 };
-
 const sessionClient = new dialogflow.SessionsClient({projectId, credentials});
-// const sessionClient = new dialogflow.SessionsClient({
-//     keyFilename: '/Users/nanda/Projects/Project/reactbot/config/reactpageagent-b0ba4-6e906c102a3c.json'
-// });
-// const sessionClient = new dialogflow.SessionsClient();
-
-// console.log('sessionClient', sessionClient);
-
 const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
-console.log('sessionPath: ', sessionPath);
 
 module.exports = {
     textQuery: async function(text, parameters= {}){
@@ -48,7 +37,6 @@ module.exports = {
     },
 
     eventQuery: async function(text, parameters= {}){
-        console.log('eventQueries')
         let self = module.exports;
         const request = {
             session: sessionPath,
@@ -60,9 +48,7 @@ module.exports = {
                 },
             }
         };
-        console.log('antes intent');
         let responses = await sessionClient.detectIntent(request);
-        console.log('depois intent');
         responses = await self.handleAction(responses);
         return responses;
     },
