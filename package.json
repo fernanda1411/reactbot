@@ -24,6 +24,7 @@
     "express": "^4.16.4",
     "google-oauth-jwt": "^0.2.0",
     "http-proxy-middleware": "^0.19.1",
+    "materialize-css": "^1.0.0",
     "mongoose": "^5.4.20"
   },
   "devDependencies": {

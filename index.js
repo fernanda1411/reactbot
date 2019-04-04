@@ -15,7 +15,7 @@ mongoose.connect(config.mongoURI, { useNewUrlParser: true });
 app.use(bodyParser.json());
 
 require('./routes/dialogFlowRoutes')(app);
-// require('./routes/fulfillmentRoutes')(app);
+//require('./routes/fulfillmentRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
     // js and css files
