@@ -46,14 +46,40 @@ class Chatbot extends Component {
 
         this.setState({messages: [...this.state.messages, says]});
         try {
-        const res = await axios.post('/api/df_text_query', {text, userID: cookies.get('userID')});
+            if (process.env.REACT_APP_DIALOGFLOW_CLIENT_KEY === undefined){
+                console.log('cant read from env variable');
+                throw Error;
+        }
 
-        for (let msg of res.data.fulfillmentMessages) {
-            says = {
-                speaks: 'bot',
-                msg: msg
+        var config ={
+            headers: {
+                'Autorization': "Bearer" + process.env.REACT_APP_DIALOGFLOW_CLIENT_KEY,
+                'Content-Type': 'application/json; charset=utf=8'
+            }
+        };
+
+        const request = {
+            queryInput: {
+                text: {
+                    text: text,
+                    languageCode: 'en-US',
+                },
+            }
+        };
+
+        const res await axios.post('https://dialoflow.googleapis.com/v2/projects/'+
+        'butlinebot/agent/sessions/reactbot-session:detectIntent',
+        request,
+        config
+        )
+        if (res.data.fulfillmentMessages) {
+            for (let msg of res.data.fulfillmentMessages) {
+                says = {
+                    speaks: 'bot',
+                    msg: msg
             }
             this.setState({messages: [...this.state.messages, says]});
+        }
         }
     } catch (e) {
         says = {

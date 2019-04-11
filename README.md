@@ -19,3 +19,6 @@ module.exports = {
     mongoURI: ""
 }
 ```
+gcloud auth print-access-token
+
+ya29.c.El_oBnyfu9OyemFbE8whXEUN9SMZP_tBxC4pOYuhwV875wxstvOasjL9igWQmv3Jr9sjfPztvrX_x5mTZK5dfnd55cUi344gjluM5i3AQdqhUjogoYTxInCkVBjQe6WOgw
