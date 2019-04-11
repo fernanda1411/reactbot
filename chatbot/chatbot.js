@@ -4,6 +4,8 @@ const structjson = require('./structjson');
 const config = require('../config/keys');
 const mongoose = require('mongoose');
 
+//const googleAuth = require('google=oauth-jwt');
+
 const projectId = config.googleProjectID;
 const sessionId = config.dialogFlowSessionID;
 const languageCode = config.dialogFlowSessionLanguageCode;
@@ -14,6 +16,8 @@ const credentials = {
 };
 
 const sessionClient = new dialogflow.SessionsClient({projectId, credentials});
+
+
 const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
 const Registration = mongoose.model('registration');
@@ -85,6 +89,7 @@ module.exports = {
         });
         try{
             let reg = await registration.save();
+            console.log("reg", reg);
         } catch (err){
             console.log(err);
         }

@@ -35,7 +35,6 @@ class Chatbot extends Component {
     }
 
     async df_text_query(text){
-        console.log('hello')
         let says = {
             speaks: 'me',
             msg: {
@@ -46,6 +45,7 @@ class Chatbot extends Component {
         };
 
         this.setState({messages: [...this.state.messages, says]});
+        try {
         const res = await axios.post('/api/df_text_query', {text, userID: cookies.get('userID')});
 
         for (let msg of res.data.fulfillmentMessages) {
@@ -55,18 +55,49 @@ class Chatbot extends Component {
             }
             this.setState({messages: [...this.state.messages, says]});
         }
+    } catch (e) {
+        says = {
+            speaks: 'bot',
+            msg: {
+                text: {
+                    text: "I'm having troubles. I need to terminate. Will be back later"
+                }
+            }
+        }
+        this.setState({ message: [...this.state.messages, says]});
+        let that = this;
+        setTimeout(function() {
+            that.setState({ showBot: false})
+        }, 2000);
     }
+};
 
     async df_event_query(event){
-        const res = await axios.post('/api/df_event_query', {event, userID: cookies.get('userID')});
-        for (let msg of res.data.fulfillmentMessages){
+        try {
+            const res = await axios.post('/api/df_event_query', {event, userID: cookies.get('userID')});
+            for (let msg of res.data.fulfillmentMessages){
             let says = {
                 speaks: 'bot',
                 msg: msg
             }
             this.setState({messages: [...this.state.messages, says]});
         }
+    } catch (e){
+        let says ={
+            speaks: 'bot',
+            msg: {
+                text: {
+                    text: "I'm having troubles. I need to terminate. Will be back later"
+                }
+            }
+        }
+        this.setState({ message: [...this.state.messages, says]});
+        let that = this;
+        setTimeout(function(){
+            that.setState({ showBot: false})
+        }, 2000);
     }
+};    
 
     resolveAfterXSeconds(x) {
         return new Promise(resolve => {
@@ -185,7 +216,7 @@ class Chatbot extends Component {
     render(){
         if (this.state.showBot){
             return (
-                <div style={{ minHeight: 500, maxHeight: 500, width: 400, float: 'right', position: 'absolute', bottom: 0, right: 0, border: '1px solid lightgrey'}}>
+                <div style={{ minHeight: 500, maxHeight: 470, width: 400, float: 'right', position: 'absolute', bottom: 0, right: 0, border: '1px solid lightgrey'}}>
                     <nav>
                         <div className="nav-wrapper">
                         <a href='/' className="brand-logo">ChatBot</a>
